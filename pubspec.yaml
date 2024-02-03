@@ -38,6 +38,11 @@ dependencies:
   connectivity_plus: any
   intl: any
   shared_preferences: any
+  permission_handler: any
+  flutter_local_notifications: any
+  firebase_messaging: any
+  firebase_core: any
+  http: any
 
 dev_dependencies:
   flutter_test:
