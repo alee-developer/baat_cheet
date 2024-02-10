@@ -43,6 +43,8 @@ dependencies:
   firebase_messaging: any
   firebase_core: any
   http: any
+  share_plus: any
+  firebase_dynamic_links: any
 
 dev_dependencies:
   flutter_test:

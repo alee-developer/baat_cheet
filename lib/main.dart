@@ -1,6 +1,7 @@
 import 'package:baat_cheet_app/firebase_options.dart';
 import 'package:baat_cheet_app/views/screens/notifications/notification_screen.dart';
 import 'package:baat_cheet_app/views/screens/notifications/notification_services.dart';
+import 'package:baat_cheet_app/views/screens/share_screen.dart';
 import 'package:baat_cheet_app/views/utils/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme().getAppTheme(),
-      home: NotificationScreen(),
+      home: ShareScreen(),
     );
   }
 }
