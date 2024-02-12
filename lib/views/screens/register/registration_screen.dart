@@ -1,4 +1,4 @@
-import 'package:baat_cheet_app/views/screens/register/optional_auth_view.dart';
+import 'package:baat_cheet_app/views/screens/login/optional_auth_view.dart';
 import 'package:baat_cheet_app/views/screens/register/registration_widgets.dart';
 import 'package:baat_cheet_app/views/utils/extensions/context_extensions.dart';
 import 'package:baat_cheet_app/views/utils/extensions/int_extensions.dart';
@@ -43,7 +43,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     60.height,
                     view.getOtpButton(),
                     50.height,
-                    OptionalAuthView()
+                    OptionalAuthView(onEmailTab: () {  }, onGoogleTab: () {  },)
                   ],
                 ),
               ).expanded(),

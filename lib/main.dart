@@ -1,4 +1,4 @@
-import 'package:baat_cheet_app/views/screens/splash/splash_screen.dart';
+import 'package:baat_cheet_app/views/screens/chats/chats_screen.dart';
 import 'package:baat_cheet_app/views/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme().getAppTheme(),
-      home: SplashScreen(),
+      home: const ChatsScreen(),
     );
   }
 }

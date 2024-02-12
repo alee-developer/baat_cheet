@@ -4,17 +4,17 @@ import 'package:baat_cheet_app/views/utils/extensions/widget_extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/widgets/background.dart';
-import '../register/optional_auth_view.dart';
+import 'optional_auth_view.dart';
 import '../register/registration_widgets.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class OTPScreen extends StatefulWidget {
+  const OTPScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<OTPScreen> createState() => _OTPScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
     var view = RegistrationWidgets(context: context);
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     40.height,
                     view.getOtpButton(),
                     30.height,
-                    const OptionalAuthView()
+                     OptionalAuthView(onEmailTab: () {  }, onGoogleTab: () {  },)
                   ],
                 ),
               ).expanded(),

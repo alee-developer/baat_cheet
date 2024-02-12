@@ -1,4 +1,3 @@
-import 'package:baat_cheet_app/views/screens/login/login_screen.dart';
 import 'package:baat_cheet_app/views/utils/colors.dart';
 import 'package:baat_cheet_app/views/utils/extensions/context_extensions.dart';
 import 'package:baat_cheet_app/views/utils/extensions/int_extensions.dart';
@@ -29,8 +28,11 @@ class RegistrationWidgets {
         ],
       );
 
-  Widget otpDescription(String number)=>Text("We have sent 6 digit OTP on $number");
-  Widget resentOtpView()=>TextButton(onPressed: (){}, child: const Text("Resent OTP"));
+  Widget otpDescription(String number) =>
+      Text("We have sent 6 digit OTP on $number");
+
+  Widget resentOtpView() =>
+      TextButton(onPressed: () {}, child: const Text("Resent OTP"));
 
   Widget otpFieldView({
     required String title,
@@ -48,23 +50,20 @@ class RegistrationWidgets {
             width: context.fullWidth,
             fieldWidth: 50,
             otpFieldStyle: OtpFieldStyle(
-              borderColor: secondaryColor,
-              enabledBorderColor: secondaryColor,
-              focusBorderColor: secondaryColor
-            ),
+                borderColor: secondaryColor,
+                enabledBorderColor: secondaryColor,
+                focusBorderColor: secondaryColor),
             keyboardType: TextInputType.number,
             fieldStyle: FieldStyle.box,
           ).withHeight(50),
         ],
       );
 
-  Widget getOtpButton() {
+  Widget getOtpButton({void Function()? onPressed}) {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
             elevation: 10, fixedSize: const Size.fromHeight(50)),
-        onPressed: () {
-          LoginScreen().pushWithWidget(context: context);
-        },
+        onPressed: onPressed,
         child: const Text(
           "Get OTP",
           style: TextStyle(
