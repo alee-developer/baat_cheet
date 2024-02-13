@@ -1,5 +1,4 @@
-import 'package:baat_cheet_app/views/screens/chats/chats_screen.dart';
-import 'package:baat_cheet_app/views/utils/app_theme.dart';
+import 'package:baat_cheet_app/views/screens/chats/chat_details_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,8 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: AppTheme().getAppTheme(),
-      home: const ChatsScreen(),
+
+      // theme: AppTheme().getAppTheme(),
+      home: ChatDetailsScreen()
     );
   }
 }

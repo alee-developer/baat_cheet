@@ -12,7 +12,6 @@ class LoaderBuilder{
   showLoader({String title = "Loading..."}){
     return showDialog(context: context, builder: (c){
       return AlertDialog(
-
         content: Row(
           children: [
             const CircularProgressIndicator(
