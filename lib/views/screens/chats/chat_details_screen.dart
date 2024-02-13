@@ -1,6 +1,5 @@
 import 'package:baat_cheet_app/models/chat/chat_message_model.dart';
 import 'package:baat_cheet_app/views/screens/chats/chat_details_widgets.dart';
-import 'package:baat_cheet_app/views/utils/colors.dart';
 import 'package:baat_cheet_app/views/utils/extensions/int_extensions.dart';
 import 'package:baat_cheet_app/views/utils/extensions/text_style_extensions.dart';
 import 'package:baat_cheet_app/views/utils/extensions/widget_extensions.dart';
@@ -29,7 +28,6 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
     var view = ChatDetailsWidgets(context: context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
         leading: const BackButton(
           color: Colors.white,
         ),
