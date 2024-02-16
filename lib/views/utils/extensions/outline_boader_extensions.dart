@@ -33,17 +33,17 @@ extension OutlineBorderExtensions on OutlineInputBorder {
         borderSide: _side(),
       );
 
-  OutlineInputBorder textFieldFocusBorder() => OutlineInputBorder(
+  OutlineInputBorder get textFieldFocusBorder=> OutlineInputBorder(
         borderRadius: _radius(),
         borderSide: _side(),
       );
 
-  OutlineInputBorder textFieldErrorBorder() => OutlineInputBorder(
+  OutlineInputBorder get textFieldErrorBorder=> OutlineInputBorder(
         borderRadius: _radius(),
         borderSide: _side(),
       );
 
-  OutlineInputBorder textFieldDisableBorder() => OutlineInputBorder(
+  OutlineInputBorder get textFieldDisableBorder => OutlineInputBorder(
         borderRadius: _radius(),
         borderSide: _side(),
       );

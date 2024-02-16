@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDuU5Kh-nTXLujp9Az8ZrjlGeLN5j9CSSQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1023199518654</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.baatCheetApp</string>
+	<key>PROJECT_ID</key>
+	<string>baat-cheet-91</string>
+	<key>STORAGE_BUCKET</key>
+	<string>baat-cheet-91.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1023199518654:ios:11671db04d49ee861c23ef</string>
+</dict>
+</plist>

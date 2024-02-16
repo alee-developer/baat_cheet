@@ -1,4 +1,4 @@
-package com.example.baat_cheet_app
+package com.edugaon.baat_cheet
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -9,7 +9,7 @@ class OptionalAuthView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         InkWell(
           onTap: onEmailTab,
@@ -29,8 +29,8 @@ class OptionalAuthView extends StatelessWidget {
         borderRadius: BorderRadius.circular(50)
       ),
       child: SizedBox(
-        height: 60,
-        width: 60,
+        height: 50,
+        width: 180,
         child: Image.asset(image,).paddingAll(padding),
       ),
     );

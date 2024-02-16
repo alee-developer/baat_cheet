@@ -6,6 +6,7 @@ import 'package:baat_cheet_app/views/utils/extensions/int_extensions.dart';
 import 'package:baat_cheet_app/views/utils/extensions/widget_extensions.dart';
 import 'package:baat_cheet_app/views/utils/widgets/background.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../register/registration_widgets.dart';
 import 'optional_auth_view.dart';
 import 'otp_screen.dart';
@@ -18,12 +19,17 @@ class PhoneScreen extends StatefulWidget {
 }
 
 class _PhoneScreenState extends State<PhoneScreen> {
+  var phoneKy = GlobalKey<FormState>();
+  var phoneController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var view = RegistrationWidgets(context: context);
     return Scaffold(
       body: AppBackGrounds(context: context).authBackGround(
-          child: Column(
+          child: Form(
+            key: phoneKy,
+              child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -49,16 +55,22 @@ class _PhoneScreenState extends State<PhoneScreen> {
               children: [
                 20.height,
                 view.fieldView(
-                    title: 'Phone', controller: TextEditingController()),
+                    // phoneKy: phoneKy,
+                    title: 'Phone',
+                    controller: phoneController),
                 40.height,
-                view.getOtpButton(onPressed: () {
-                  const OTPScreen().pushWithWidget(context: context);
+                view.submitButton("Get OTP",onPressed: () {
+                  if(phoneKy.currentState!.validate()){
+                     OTPScreen(phoneNumber: phoneController.text,).pushWithWidget(context: context);
+                  }else{
+                    Fluttertoast.showToast(msg: "Enter valid number!",textColor: Colors.red);
+                  }
                 }),
                 20.height,
                 const Text("Login With").center(),
                 OptionalAuthView(
                   onEmailTab: () {
-                    const EmailLoginScreen().pushWithWidget(context: context);
+                     EmailLoginScreen().pushWithWidget(context: context);
                   },
                   onGoogleTab: () {},
                 ),
@@ -67,8 +79,9 @@ class _PhoneScreenState extends State<PhoneScreen> {
                 10.height,
                 Row(
                   children: [
-                    _button("assets/icons/email_image.png",onPressed: (){
-                      const EmailRegistrationScreen().pushWithWidget(context: context);
+                    _button("assets/icons/email_image.png", onPressed: () {
+                      const EmailRegistrationScreen()
+                          .pushWithWidget(context: context);
                     }).expanded(),
                     10.width,
                     _button("assets/icons/google_image.png").expanded()
@@ -78,15 +91,15 @@ class _PhoneScreenState extends State<PhoneScreen> {
             ),
           ).expanded(),
         ],
-      )),
+      ))),
     );
   }
 
-  Widget _button(String path,{void Function()? onPressed}) => ElevatedButton(
+  Widget _button(String path, {void Function()? onPressed}) => ElevatedButton(
       style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
           elevation: 0,
-          side: const BorderSide(width: 1.5,color: kPrimaryColor),
+          side: const BorderSide(width: 1.5, color: kPrimaryColor),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))),
       onPressed: onPressed,

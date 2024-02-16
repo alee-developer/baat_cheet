@@ -41,7 +41,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     10.height,
                     view.fieldView(title: 'Phone', controller: phoneController),
                     60.height,
-                    view.getOtpButton(),
+                    view.submitButton(""),
                     50.height,
                     OptionalAuthView(onEmailTab: () {  }, onGoogleTab: () {  },)
                   ],

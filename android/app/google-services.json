@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1023199518654",
+    "project_id": "baat-cheet-91",
+    "storage_bucket": "baat-cheet-91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023199518654:android:43c603e6ec89ffd11c23ef",
+        "android_client_info": {
+          "package_name": "com.edugaon.baat_cheet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023199518654-q36l70t4g8mdlijpvhfjgs352hal1iu2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edugaon.baat_cheet",
+            "certificate_hash": "11b7d98832ea47a1c4edb7df2cb8d3ae889fcfda"
+          }
+        },
+        {
+          "client_id": "1023199518654-slrt5d5o60olr7t2sludl72fs0noo3o4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMCyigHFGgSNdf9MUjkN8zHcj-A1xQdic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023199518654-slrt5d5o60olr7t2sludl72fs0noo3o4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1023199518654-c9kkd8jpobf2gi68rcfrueeu4neat2jr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.baatCheetApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

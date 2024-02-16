@@ -1,5 +1,6 @@
 import 'package:baat_cheet_app/models/chat/chat_user_model.dart';
 import 'package:baat_cheet_app/views/screens/chats/chats_widgets.dart';
+import 'package:baat_cheet_app/views/screens/drawer/drawer_screen.dart';
 import 'package:baat_cheet_app/views/utils/colors.dart';
 import 'package:baat_cheet_app/views/utils/extensions/int_extensions.dart';
 import 'package:flutter/material.dart';
@@ -20,13 +21,15 @@ class _ChatsScreenState extends State<ChatsScreen> {
   Widget build(BuildContext context) {
     var view = ChatsWidgets(context: context);
     return Scaffold(
+      drawer: const DrawerScreen(),
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
         elevation: 10,
-        title: const Text("Edu Messengers"),
+        title: const Text("Chats"),
         actions: [
           IconButton(onPressed: (){
             showSearch(context: context, delegate: SearchViewDelegate(allUsers));
-          }, icon: Icon(Icons.search))
+          }, icon: const Icon(Icons.search))
         ],
       ),
       body: ListView.separated(
@@ -48,7 +51,7 @@ class SearchViewDelegate extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         elevation: 10,
         backgroundColor: secondaryColor,
         iconTheme: IconThemeData()
@@ -69,7 +72,7 @@ class SearchViewDelegate extends SearchDelegate {
   Widget? buildLeading(BuildContext context) {
     return IconButton(onPressed: (){
       close(context, null);
-    }, icon: Icon(Icons.arrow_back));
+    }, icon: const Icon(Icons.arrow_back));
   }
 
   @override

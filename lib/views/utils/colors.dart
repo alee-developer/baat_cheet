@@ -11,7 +11,7 @@ const colorWhite = Colors.white;
 const colorGreen = Colors.green;
 
 //colors
-const primaryColor = Color(0xFFff830e);
+const primaryColor = Color(0xfff6ac3a);
 const secondaryColor =Color(0xFFf4b44f);
 const dotColor = Color(0xFFf4b44f);
 const bgColor = Color(0xfff6ac3a);
