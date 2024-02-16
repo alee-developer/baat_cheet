@@ -21,7 +21,7 @@ class SplashWidgets {
               style: TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
-                  color: primaryColor),
+                  color: Colors.white),
             ).center().withSize(width: 200, height: 200),
           ),
           Text(

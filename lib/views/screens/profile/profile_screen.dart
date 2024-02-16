@@ -63,11 +63,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget mainView() {
     var view = ProfileWidgets(context: context);
     return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 20),
       children: [
         view.userImageView(imagePath, hasImagePath, onPressed: () {
           showTakeImageView(context);
         }),
+        20.height,
         view.itemView(nameController, canEdit: editName, onPressed: () {
           setState(() {
             editName = !editName;

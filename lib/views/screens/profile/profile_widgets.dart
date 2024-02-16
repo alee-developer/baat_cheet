@@ -12,15 +12,15 @@ class ProfileWidgets extends ShimmerBuilder {
   ProfileWidgets({required this.context});
 
   Widget userImageView(String imagePath, bool isNetwork,
-      {void Function()? onPressed}) {
+      {void Function()? onPressed,double size = 150,bool showIcon = true}) {
     return SizedBox(
-      height: 180,
-      width: 150,
+      height: size,
+      width: size,
       child: Stack(
         children: [
           Container(
-            height: 150,
-            width: 150,
+            height: size,
+            width: size,
             decoration: BoxDecoration(
                 border: Border.all(width: 1, color: secondaryColor),
                 borderRadius: BorderRadius.circular(75)),
@@ -29,8 +29,8 @@ class ProfileWidgets extends ShimmerBuilder {
                     borderRadius: BorderRadius.circular(75),
                     child: Image.network(
                       imagePath,
-                      height: 150,
-                      width: 150,
+                      height: size,
+                      width: size,
                       fit: BoxFit.fill,
                     ),
                   )
@@ -39,28 +39,28 @@ class ProfileWidgets extends ShimmerBuilder {
                         borderRadius: BorderRadius.circular(75),
                         child: Image.file(
                           File(imagePath),
-                          height: 150,
-                          width: 150,
+                          height: size,
+                          width: size,
                           fit: BoxFit.fill,
                         ),
                       )
-                    : const Icon(
+                    :  Icon(
                         Icons.person_outline_outlined,
                         color: secondaryColor,
-                        size: 80,
+                        size: size/2,
                       ),
           ).center(),
-          Positioned(
+          showIcon?Positioned(
               bottom: 10,
-              right: 10,
+              right: 0,
               child: CircleAvatar(
                 backgroundColor: secondaryColor,
                 child: IconButton(
                   onPressed: onPressed,
-                  icon: const Icon(Icons.edit),
+                  icon: const Icon(Icons.edit,color: Colors.white,),
                   color: Colors.white,
                 ),
-              ))
+              )):Container()
         ],
       ),
     ).center();
