@@ -1,30 +1,39 @@
+// To parse this JSON data, do
+//
+//     final chatMessageModel = chatMessageModelFromJson(jsonString);
+
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+ChatMessageModel chatMessageModelFromJson(String str) => ChatMessageModel.fromJson(json.decode(str));
+
+String chatMessageModelToJson(ChatMessageModel data) => json.encode(data.toJson());
+
 class ChatMessageModel {
   String? message;
-  bool? isCurrentUser;
-  DateTime? messageAt;
-  DateTime? updatedAt;
+  DateTime? date;
+  String? to;
+  String? from;
 
-  ChatMessageModel(
-      {this.message, this.isCurrentUser, this.messageAt, this.updatedAt});
+  ChatMessageModel({
+    this.message,
+    this.date,
+    this.to,
+    this.from,
+  });
 
- static List<ChatMessageModel> messages()=>[
-    ChatMessageModel(
-      message: "Hi",
-      isCurrentUser: false,
-      messageAt: DateTime.now(),
-      updatedAt: DateTime.now()
-    ),
-    ChatMessageModel(
-        message: "Hello",
-        isCurrentUser: true,
-        messageAt: DateTime.now(),
-        updatedAt: DateTime.now()
-    ),
-    ChatMessageModel(
-        message: "How are you?",
-        isCurrentUser: false,
-        messageAt: DateTime.now(),
-        updatedAt: DateTime.now()
-    )
-  ];
+  factory ChatMessageModel.fromJson(Map<String, dynamic> json) => ChatMessageModel(
+    message: json["message"],
+    date: (json["date"] as Timestamp).toDate(),
+    to: json["to"],
+    from: json["from"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "message": message,
+    "date": date,
+    "to": to,
+    "from": from,
+  };
 }

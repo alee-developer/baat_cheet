@@ -12,7 +12,7 @@ class ProfileWidgets extends ShimmerBuilder {
   ProfileWidgets({required this.context});
 
   Widget userImageView(String imagePath, bool isNetwork,
-      {void Function()? onPressed,double size = 150,bool showIcon = true}) {
+      {void Function()? onPressed, double size = 150, bool showIcon = true,Color borderColor = secondaryColor}) {
     return SizedBox(
       height: size,
       width: size,
@@ -22,7 +22,7 @@ class ProfileWidgets extends ShimmerBuilder {
             height: size,
             width: size,
             decoration: BoxDecoration(
-                border: Border.all(width: 1, color: secondaryColor),
+                border: Border.all(width: 1, color: borderColor),
                 borderRadius: BorderRadius.circular(75)),
             child: isNetwork
                 ? ClipRRect(
@@ -44,26 +44,31 @@ class ProfileWidgets extends ShimmerBuilder {
                           fit: BoxFit.fill,
                         ),
                       )
-                    :  Icon(
+                    : Icon(
                         Icons.person_outline_outlined,
-                        color: secondaryColor,
-                        size: size/2,
+                        color: borderColor,
+                        size: size / 2,
                       ),
           ).center(),
-          showIcon?Positioned(
-              bottom: 10,
-              right: 0,
-              child: CircleAvatar(
-                backgroundColor: secondaryColor,
-                child: IconButton(
-                  onPressed: onPressed,
-                  icon: const Icon(Icons.edit,color: Colors.white,),
-                  color: Colors.white,
-                ),
-              )):Container()
+          showIcon
+              ? Positioned(
+                  bottom: 10,
+                  right: 0,
+                  child: CircleAvatar(
+                    backgroundColor: secondaryColor,
+                    child: IconButton(
+                      onPressed: onPressed,
+                      icon: const Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                      ),
+                      color: Colors.white,
+                    ),
+                  ))
+              : Container()
         ],
       ),
-    ).center();
+    );
   }
 
   Widget itemView(TextEditingController controller,

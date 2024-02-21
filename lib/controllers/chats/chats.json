@@ -1,0 +1,14 @@
+{
+  "participants":
+  {
+    "sendId": "",
+    "receiveId":""
+  },
+  "messages": [
+    {
+      "text": "",
+      "time": "",
+      "date": ""
+    }
+  ]
+}

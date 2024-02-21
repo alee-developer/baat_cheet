@@ -1,9 +1,14 @@
+import 'package:baat_cheet_app/controllers/users/users_controller.dart';
 import 'package:baat_cheet_app/models/chat/chat_user_model.dart';
+import 'package:baat_cheet_app/models/users/user_details_model.dart';
 import 'package:baat_cheet_app/views/screens/chats/chats_widgets.dart';
 import 'package:baat_cheet_app/views/screens/drawer/drawer_screen.dart';
 import 'package:baat_cheet_app/views/utils/colors.dart';
 import 'package:baat_cheet_app/views/utils/extensions/int_extensions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import '../../../controllers/chats/chat_controllers.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -12,7 +17,7 @@ class ChatsScreen extends StatefulWidget {
   State<ChatsScreen> createState() => _ChatsScreenState();
 }
 
-class _ChatsScreenState extends State<ChatsScreen> {
+class _ChatsScreenState extends State<ChatsScreen> with ChatControllers {
   bool showSearchValue = true;
   var allUsers = ChatUserModel.chats();
   var searchedUsers = <ChatUserModel>[];
@@ -27,18 +32,40 @@ class _ChatsScreenState extends State<ChatsScreen> {
         elevation: 10,
         title: const Text("Chats"),
         actions: [
-          IconButton(onPressed: (){
-            showSearch(context: context, delegate: SearchViewDelegate(allUsers));
-          }, icon: const Icon(Icons.search))
+          StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: firestore.snapshots(),
+              builder: (c, snapshot) {
+                var data = snapshot.data?.docs
+                        .map((e) => UserDetailsModel.fromJson(e.data()))
+                        .toList() ??
+                    List<UserDetailsModel>.empty();
+                return data.isNotEmpty
+                    ? IconButton(
+                        onPressed: () {
+                          showSearch(
+                              context: context,
+                              delegate: SearchViewDelegate(data));
+                        },
+                        icon: const Icon(Icons.search))
+                    : Container();
+              })
         ],
       ),
-      body: ListView.separated(
-        itemCount:
-        allUsers.length,
-        itemBuilder: (context, index) => view.chatItemView(
-            allUsers[index]),
-        separatorBuilder: (BuildContext context, int index) {
-          return 1.height;
+      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: firestore.where("userId",isNotEqualTo: UsersController().getUserId).snapshots(),
+        builder: (BuildContext context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          var data = snapshot.data?.docs
+                  .map((e) => UserDetailsModel.fromJson(e.data()))
+                  .toList() ??
+              List<UserDetailsModel>.empty();
+          return ListView.separated(
+            itemCount: data.length,
+            itemBuilder: (context, index) => view.chatItemView(data[index]),
+            separatorBuilder: (BuildContext context, int index) {
+              return 1.height;
+            },
+          );
         },
       ),
     );
@@ -46,33 +73,37 @@ class _ChatsScreenState extends State<ChatsScreen> {
 }
 
 class SearchViewDelegate extends SearchDelegate {
-  var users = <ChatUserModel>[];
+  var users = <UserDetailsModel>[];
+
   SearchViewDelegate(this.users);
+
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
-      appBarTheme: const AppBarTheme(
-        elevation: 10,
-        backgroundColor: secondaryColor,
-        iconTheme: IconThemeData()
-      )
-    );
+        appBarTheme: const AppBarTheme(
+            elevation: 10,
+            backgroundColor: secondaryColor,
+            iconTheme: IconThemeData()));
   }
 
   @override
   List<Widget>? buildActions(BuildContext context) {
-   return [
-     IconButton(onPressed: (){
-       query = '';
-     }, icon: const Icon(Icons.clear))
-   ];
+    return [
+      IconButton(
+          onPressed: () {
+            query = '';
+          },
+          icon: const Icon(Icons.clear))
+    ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
-    return IconButton(onPressed: (){
-      close(context, null);
-    }, icon: const Icon(Icons.arrow_back));
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: const Icon(Icons.arrow_back));
   }
 
   @override
@@ -85,24 +116,20 @@ class SearchViewDelegate extends SearchDelegate {
     return searchingView(context);
   }
 
-  searchingView(BuildContext context){
+  searchingView(BuildContext context) {
     var view = ChatsWidgets(context: context);
     var searchUsers = [];
-    for(var user in users){
-      if(user.title!.trim().toLowerCase().contains(query)){
+    for (var user in users) {
+      if (user.name!.trim().toLowerCase().contains(query.toLowerCase())) {
         searchUsers.add(user);
       }
     }
     return ListView.separated(
-      itemCount:
-      searchUsers.length,
-      itemBuilder: (context, index) => view.chatItemView(
-          searchUsers[index]),
+      itemCount: searchUsers.length,
+      itemBuilder: (context, index) => view.chatItemView(searchUsers[index]),
       separatorBuilder: (BuildContext context, int index) {
         return 1.height;
       },
     );
   }
-
 }
-

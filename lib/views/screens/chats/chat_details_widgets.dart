@@ -1,3 +1,4 @@
+import 'package:baat_cheet_app/controllers/users/users_controller.dart';
 import 'package:baat_cheet_app/models/chat/chat_message_model.dart';
 import 'package:baat_cheet_app/views/utils/colors.dart';
 import 'package:baat_cheet_app/views/utils/extensions/context_extensions.dart';
@@ -14,7 +15,7 @@ class ChatDetailsWidgets {
     return SizedBox(
       width: context.fullWidth/1.4,
       child: Card(
-        color: chat.isCurrentUser == false?Colors.transparent:secondaryColor,
+        color: UsersController().getUserId != chat.from?Colors.transparent:secondaryColor,
         child: ListView(
           shrinkWrap: true,
           children: [
@@ -26,7 +27,7 @@ class ChatDetailsWidgets {
             Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                chat.messageAt.toTimeOnly,
+                chat.date.toTimeOnly,
                 style: const TextStyle(fontSize: 10, color: Colors.black),
               ),
             )

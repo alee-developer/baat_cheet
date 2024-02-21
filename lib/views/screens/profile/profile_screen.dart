@@ -3,6 +3,7 @@ import 'package:baat_cheet_app/models/users/user_details_model.dart';
 import 'package:baat_cheet_app/views/screens/profile/profile_widgets.dart';
 import 'package:baat_cheet_app/views/utils/extensions/context_extensions.dart';
 import 'package:baat_cheet_app/views/utils/extensions/int_extensions.dart';
+import 'package:baat_cheet_app/views/utils/extensions/widget_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -67,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: [
         view.userImageView(imagePath, hasImagePath, onPressed: () {
           showTakeImageView(context);
-        }),
+        }).center(),
         20.height,
         view.itemView(nameController, canEdit: editName, onPressed: () {
           setState(() {

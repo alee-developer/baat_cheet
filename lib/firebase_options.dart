@@ -54,6 +54,7 @@ class DefaultFirebaseOptions {
     authDomain: 'baat-cheet-91.firebaseapp.com',
     storageBucket: 'baat-cheet-91.appspot.com',
     measurementId: 'G-Z2YPCH3XD4',
+    databaseURL: 'https://baat-cheet-91-default-rtdb.asia-southeast1.firebasedatabase.app'
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -62,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1023199518654',
     projectId: 'baat-cheet-91',
     storageBucket: 'baat-cheet-91.appspot.com',
+    databaseURL: 'https://baat-cheet-91-default-rtdb.asia-southeast1.firebasedatabase.app'
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -71,5 +73,6 @@ class DefaultFirebaseOptions {
     projectId: 'baat-cheet-91',
     storageBucket: 'baat-cheet-91.appspot.com',
     iosBundleId: 'com.example.baatCheetApp',
+    databaseURL: 'https://baat-cheet-91-default-rtdb.asia-southeast1.firebasedatabase.app'
   );
 }
