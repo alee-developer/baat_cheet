@@ -2,11 +2,13 @@ import 'package:baat_cheet_app/controllers/chats/chat_controllers.dart';
 import 'package:baat_cheet_app/models/chat/chat_data_model.dart';
 import 'package:baat_cheet_app/models/users/user_details_model.dart';
 import 'package:baat_cheet_app/views/screens/chats/chat_details_widgets.dart';
+import 'package:baat_cheet_app/views/utils/extensions/date_extensions.dart';
 import 'package:baat_cheet_app/views/utils/extensions/int_extensions.dart';
 import 'package:baat_cheet_app/views/utils/extensions/text_style_extensions.dart';
 import 'package:baat_cheet_app/views/utils/extensions/widget_extensions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../controllers/users/users_controller.dart';
 import '../profile/profile_widgets.dart';
 
 class ChatDetailsScreen extends StatefulWidget {
@@ -26,11 +28,26 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
 
   onNewItemAddedScroll() {
     scrollController.jumpTo(scrollController.position.maxScrollExtent);
+    setState(() {});
   }
+
+  String chatId = "";
 
   @override
   void initState() {
     super.initState();
+    createChatId();
+    // onNewItemAddedScroll();
+  }
+
+  createChatId() async {
+    var data = await UsersController().getUserDetails();
+    if (data.createdAt != null && data.createdAt != null) {
+      var a = data.createdAt!.millisecondsSinceEpoch;
+      var b = widget.userData.createdAt!.millisecondsSinceEpoch;
+      chatId = (a + b).toString();
+      setState(() {});
+    }
   }
 
   @override
@@ -88,48 +105,45 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
       ),
       body: Column(
         children: [
-          StreamBuilder(stream: ChatControllers().getSingleMessage("chatId"), builder: (c,snap){
-            var data = snap.data?.snapshot.children;
-            if(snap.hasData){
-              var d = data?.map((e) => e.value).toList();
-              print(d);
-              // var a = ChatDataModel.fromJson(data as Map<dynamic, dynamic>);
-              // print("data ${a.messages?.first.text}");
-            }
-
-            // var chat = data?.map((e) => ChatDataModel.fromJson(e. as Map<String, dynamic>));
-            // print("chat:$chat");
-            return Text("data");
-          }).expanded(),
-          // StreamBuilder(
-          //     stream:
-          //         ChatControllers().getUserChats(widget.userData.userId ?? ""),
-          //     builder: (c, snap) {
-          //       var chats = snap.data?.docs
-          //               .map((e) => ChatMessageModel.fromJson(e.data()))
-          //               .toList()
-          //               .reversed
-          //               .toList() ??
-          //           List<ChatMessageModel>.empty();
-          //       return ListView.builder(
-          //           controller: scrollController,
-          //           itemCount: chats.length,
-          //           itemBuilder: (context, index) => Align(
-          //                 alignment:
-          //                     chats[index].from != UsersController().getUserId
-          //                         ? Alignment.topLeft
-          //                         : Alignment.topRight,
-          //                 child: view.chatItemView(chats[index]),
-          //               )).expanded();
-          //     }).expanded(),
+          StreamBuilder(
+              stream: ChatControllers().getDate(chatId),
+              builder: (c, snap) {
+                var data = snap.data?.snapshot.children;
+                var messages = List<ChatDataModel>.empty();
+                if (snap.hasData) {
+                  var chats = data?.map((e) => e.value).toList();
+                  messages = chats
+                          ?.map((e) => ChatDataModel.fromJson(
+                              e as Map<dynamic, dynamic>))
+                          .toList()
+                          .reversed
+                          .toList() ??
+                      messages;
+                  return ListView.builder(
+                      reverse: true,
+                      controller: scrollController,
+                      itemCount: messages.length,
+                      itemBuilder: (context, index) => Align(
+                            alignment: messages[index].senderId ==
+                                    UsersController().getUserId
+                                ? Alignment.topLeft
+                                : Alignment.topRight,
+                            child: view.chatItemView(messages[index]),
+                          ));
+                } else {
+                  return view.chatShimmerView();
+                }
+              }).expanded(),
           view.sendMessageView(sendMessageValue, messageController,
               onPressed: () {
             var chat = ChatDataModel(
-              text: messageController.text,
-              senderId: widget.userData.userId,
-              timestamp: DateTime.now().millisecondsSinceEpoch
-                );
-            ChatControllers().sendDataMessage("chatId",chat);
+                text: messageController.text,
+                senderId: widget.userData.userId,
+                date: DateTime.now().dateWithHalfMonthName,
+                time: DateTime.now().toTimeOnly);
+            ChatControllers().sendDataMessage(chatId, chat);
+            // onNewItemAddedScroll();
+            messageController.clear();
           }, onChanged: (String message) {
             if (message.isNotEmpty && message != '') {
               setState(() {
@@ -140,7 +154,7 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                 sendMessageValue = false;
               });
             }
-          }),
+          }).withHeight(60),
         ],
       ),
     );

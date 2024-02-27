@@ -27,6 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String imagePath = "";
   bool hasImagePath = false;
   bool showLoader = true;
+  var imageUrl = "";
 
   @override
   void initState() {
@@ -94,7 +95,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         : false,
             onPressed: () async {
               LoaderBuilder(context: context).showLoader();
-              var imageUrl = "";
               if (imageFile.path != "") {
                 imageUrl =
                     await UsersController().uploadProfilePicture(imageFile);
@@ -107,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   name: nameController.text,
                   email: userData.email,
                   about: aboutController.text,
-                  imageUrl: imageUrl != "" ? imagePath : userData.imageUrl);
+                  imageUrl: imageUrl != "" ? imageUrl : userData.imageUrl);
               await userController.updateUser(data);
               if (!mounted) return;
               LoaderBuilder(context: context).dismissLoader();
@@ -127,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             actions: [
               ElevatedButton.icon(
                   onPressed: () {
-                    getImage(ImageSource.gallery);
+                    getImageFromSource(ImageSource.gallery);
                     context.onBackPressed;
                   },
                   icon: const Icon(
@@ -142,7 +142,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(),
                   onPressed: () {
-                    getImage(ImageSource.camera);
+                    getImageFromSource(ImageSource.camera);
                     context.onBackPressed;
                   },
                   icon: const Icon(
@@ -156,8 +156,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
   }
 
-  getImage(ImageSource source) async {
-    imageFile = (await ImagePicker().pickImage(source: source)) ?? XFile("");
+  getImageFromSource(ImageSource source) async {
+    imageFile = (await ImagePicker().pickImage(source: source,imageQuality: 50)) ?? XFile("");
     setState(() {
       imagePath = imageFile.path;
       hasImagePath = false;

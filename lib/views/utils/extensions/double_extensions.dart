@@ -10,5 +10,6 @@ extension DoubleExtensions on double{
   double getWidth({required BuildContext context}) => (MediaQuery.sizeOf(context).width)/this;
 
   BorderRadius get circularRadius => BorderRadius.circular(this);
+ DateTime get toDateTime =>DateTime.fromMillisecondsSinceEpoch(toInt()*1000);
 
 }

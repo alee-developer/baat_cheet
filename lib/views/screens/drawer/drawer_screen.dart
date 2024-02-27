@@ -46,31 +46,27 @@ class _DrawerScreenState extends State<DrawerScreen> {
         children: [
           DrawerHeader(
               child: Column(
-                children: [
-                  view.userImageView(imagePath, hasImagePath,
-                      size: 100, showIcon: false,onPressed: (){
-
-                      }),
-                  5.height,
-                  Text(userData.name??"NA")
-                ],
-              )),
-          drawerItemView("Profile", onTap: () {
+            children: [
+              view.userImageView(imagePath, hasImagePath,
+                  size: 100, showIcon: false, onPressed: () {}),
+              5.height,
+              Text(userData.name ?? "NA")
+            ],
+          )).onTab(() {
             context.onBackPressed;
             const ProfileScreen().pushWithWidget(context: context);
-          }, icon: Icons.person_outline_outlined),
-          const Divider(),
+          }),
+          // drawerItemView("Profile", onTap: () {
+          //   context.onBackPressed;
+          //   const ProfileScreen().pushWithWidget(context: context);
+          // }, icon: Icons.person_outline_outlined),
+          // const Divider(),
           drawerItemView("Chats", onTap: () {
             context.onBackPressed;
           }, icon: Icons.message_outlined),
           const Divider(),
           drawerItemView("Logout", onTap: () async {
-            await UsersController().userLogout();
-            if (UsersController().firebaseAuth.currentUser == null) {
-              const EmailLoginScreen().pushWithRemoveUntil(context: context);
-            } else {
-              Fluttertoast.showToast(msg: "Logout failed");
-            }
+            showLogoutDialog();
           }, icon: Icons.logout),
           const Divider()
         ],
@@ -85,5 +81,28 @@ class _DrawerScreenState extends State<DrawerScreen> {
       title: Text(title),
       onTap: onTap,
     );
+  }
+
+  showLogoutDialog(){
+    showDialog(context: context, builder: (c){
+      return AlertDialog(
+        title: const Text("Logout!"),
+        content: const Text("Do you want to logout?"),
+        actions: [
+          ElevatedButton(onPressed: (){
+            context.onBackPressed;
+          }, child: const Text("No")),
+          ElevatedButton(onPressed: ()async{
+            await UsersController().userLogout();
+            if (UsersController().firebaseAuth.currentUser == null) {
+              if(!mounted) return;
+              const EmailLoginScreen().pushWithRemoveUntil(context: context);
+            } else {
+              Fluttertoast.showToast(msg: "Logout failed");
+            }
+          }, child: const Text("Yes"))
+        ],
+      );
+    });
   }
 }

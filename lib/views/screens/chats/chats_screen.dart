@@ -23,6 +23,13 @@ class _ChatsScreenState extends State<ChatsScreen> with ChatControllers {
   var searchedUsers = <ChatUserModel>[];
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+
+
+  @override
   Widget build(BuildContext context) {
     var view = ChatsWidgets(context: context);
     return Scaffold(
@@ -59,13 +66,19 @@ class _ChatsScreenState extends State<ChatsScreen> with ChatControllers {
                   .map((e) => UserDetailsModel.fromJson(e.data()))
                   .toList() ??
               List<UserDetailsModel>.empty();
-          return ListView.separated(
-            itemCount: data.length,
-            itemBuilder: (context, index) => view.chatItemView(data[index]),
-            separatorBuilder: (BuildContext context, int index) {
-              return 1.height;
-            },
-          );
+          if(snapshot.hasData){
+            return ListView.separated(
+              itemCount: data.length,
+              itemBuilder: (context, index) => view.chatItemView(data[index]),
+              separatorBuilder: (BuildContext context, int index) {
+                return 1.height;
+              },
+            );
+
+          }else{
+            return view.chatShimmerView();
+          }
+
         },
       ),
     );

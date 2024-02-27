@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 extension DateExtensions on DateTime? {
   String get toDateOnly => DateFormat("dd/MM/yyyy").format(this!);
 
-  String get toTimeOnly => DateFormat("HH:mm a").format(this!);
+  String get toTimeOnly => DateFormat.jm().format(this!);
 
   String get fullDateAndTime => DateFormat("dd/MM/yyy HH:mm:ss").format(this!);
 
@@ -24,8 +23,4 @@ extension DateExtensions on DateTime? {
 
   String get minutesOnly => DateFormat("mm").format(this!);
 
-  int get toTimestamp => this!.millisecondsSinceEpoch;
-
-  DateTime fromTimestamp(Timestamp date) =>
-      DateTime.fromMillisecondsSinceEpoch((date.millisecondsSinceEpoch * 1000));
 }

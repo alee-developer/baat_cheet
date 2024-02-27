@@ -11,23 +11,27 @@ String chatDataModelToJson(ChatDataModel data) => json.encode(data.toJson());
 class ChatDataModel {
   String? senderId;
   String? text;
-  num? timestamp;
+  String? date;
+  String? time;
 
   ChatDataModel({
     this.senderId,
     this.text,
-    this.timestamp,
+    this.date,
+    this.time
   });
 
-  factory ChatDataModel.fromJson(Map<String, dynamic> json) => ChatDataModel(
+  factory ChatDataModel.fromJson(Map<dynamic, dynamic> json) => ChatDataModel(
     senderId: json["senderId"],
     text: json["text"],
-    timestamp: json["timestamp"]?.toDouble(),
+    date: json['date'],
+    time: json['time']
   );
 
   Map<String, dynamic> toJson() => {
     "senderId": senderId,
     "text": text,
-    "timestamp": timestamp,
+    "date": date,
+    'time':time
   };
 }
