@@ -1,8 +1,10 @@
 import 'package:baat_cheet_app/firebase_options.dart';
 import 'package:baat_cheet_app/views/screens/splash/splash_screen.dart';
+
 import 'package:baat_cheet_app/views/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,8 +17,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
+    return GetMaterialApp(
+        title: 'Baat Cheet',
         theme: AppTheme().getAppTheme(),
         home: const SplashScreen());
   }
