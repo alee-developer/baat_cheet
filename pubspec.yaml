@@ -54,6 +54,7 @@ dependencies:
   video_player: any
   camera: any
   path_provider: any
+  provider: any
 
 dev_dependencies:
   flutter_test:

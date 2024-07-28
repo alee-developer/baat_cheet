@@ -1,4 +1,5 @@
 import 'package:baat_cheet_app/firebase_options.dart';
+import 'package:baat_cheet_app/views/eshop/auth/login_screen.dart';
 import 'package:baat_cheet_app/views/screens/splash/splash_screen.dart';
 
 import 'package:baat_cheet_app/views/utils/app_theme.dart';
@@ -20,6 +21,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         title: 'Baat Cheet',
         theme: AppTheme().getAppTheme(),
-        home: const SplashScreen());
+        home: const LoginScreen());
   }
 }
