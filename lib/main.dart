@@ -1,5 +1,5 @@
 import 'package:baat_cheet_app/firebase_options.dart';
-import 'package:baat_cheet_app/views/screens/splash/splash_screen.dart';
+import 'package:baat_cheet_app/views/screens/landing/landing_screen.dart';
 import 'package:baat_cheet_app/views/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,6 +18,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: AppTheme().getAppTheme(),
-        home: const SplashScreen());
+        home: const LandingScreen());
   }
 }
